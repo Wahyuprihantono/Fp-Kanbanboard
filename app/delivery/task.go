@@ -22,6 +22,7 @@ func NewTaskHandler(r *gin.RouterGroup, taskUsecase domain.TaskUsecase) {
 	taskRoute := r.Group("/tasks")
 	taskRoute.Use(middleware.Authentication())
 	taskRoute.GET("/", handler.GetTasks)
+	taskRoute.Use(middleware.Authorization([]string{"user"}))
 	taskRoute.POST("/", handler.StoreTask)
 	taskRoute.PUT("/:taskId", handler.UpdateTask)
 	taskRoute.PATCH("/update-status/:taskId", handler.UpdateStatusTask)
