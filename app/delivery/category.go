@@ -21,7 +21,7 @@ func NewCategoryHandler(r *gin.RouterGroup, categoryUsecase domain.CategoryUseca
 	categoryRoute := r.Group("/categories")
 	categoryRoute.Use(middleware.Authentication())
 	categoryRoute.GET("/", handler.GetCategories)
-	categoryRoute.Use(middleware.Authorization([]string{"admin"}))
+	categoryRoute.Use(middleware.Authorization([]string{"user"}))
 	categoryRoute.POST("/", handler.StoreCategory)
 	categoryRoute.PATCH(":categoryId", handler.UpdateCategory)
 	categoryRoute.DELETE(":categoryId", handler.DeleteCategory)
