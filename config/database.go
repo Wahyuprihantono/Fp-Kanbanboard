@@ -14,6 +14,14 @@ import (
 
 var db *gorm.DB
 
+func main() {
+	database.StartDB()
+
+	var PORT = os.Getenv("PORT")
+
+	routers.StartServer().Run(":" + PORT)
+}
+
 func StartDB() {
 	if os.Getenv("APP_ENV") != "production" {
 		err := godotenv.Load()
